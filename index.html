@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#b9303a" />
+  <title>InStyle Nail & Spa | Menu & Pricing</title>
+  <style>
+    :root {
+      --red: #c9333f;
+      --red-dark: #8f1f29;
+      --blue: #4d86cf;
+      --blue-dark: #2e5f9b;
+      --ink: #241f20;
+      --muted: #6f6566;
+      --cream: #fffaf7;
+      --blush: #f9eceb;
+      --blush-deep: #f3dcda;
+      --gold: #c7a166;
+      --white: #ffffff;
+      --shadow: 0 18px 50px rgba(83, 43, 43, 0.10);
+      --radius: 22px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 0% 0%, rgba(77,134,207,.10), transparent 26rem),
+        radial-gradient(circle at 100% 8%, rgba(201,51,63,.09), transparent 28rem),
+        linear-gradient(180deg, #fff, var(--cream));
+      font-family: "Segoe UI", Arial, sans-serif;
+      line-height: 1.45;
+    }
+
+    .page {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 32px 0 56px;
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+      padding: 48px 24px 40px;
+      margin-bottom: 28px;
+      border: 1px solid rgba(201, 51, 63, .12);
+      border-radius: 30px;
+      background:
+        linear-gradient(135deg, rgba(255,255,255,.95), rgba(255,247,246,.94)),
+        var(--white);
+      box-shadow: var(--shadow);
+    }
+
+    .hero::before,
+    .hero::after {
+      content: "";
+      position: absolute;
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      filter: blur(2px);
+      opacity: .22;
+      pointer-events: none;
+    }
+
+    .hero::before {
+      left: -90px;
+      top: -100px;
+      background: var(--blue);
+    }
+
+    .hero::after {
+      right: -90px;
+      bottom: -120px;
+      background: var(--red);
+    }
+
+    .brand {
+      position: relative;
+      z-index: 1;
+      display: inline-flex;
+      align-items: baseline;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin: 0;
+      letter-spacing: -.03em;
+    }
+
+    .brand .instyle {
+      color: var(--blue);
+      font-family: "Brush Script MT", "Segoe Script", cursive;
+      font-size: clamp(3rem, 8vw, 5.5rem);
+      font-weight: 700;
+      line-height: .95;
+      text-shadow: 0 3px 0 rgba(46,95,155,.08);
+    }
+
+    .brand .nailspa {
+      color: var(--red);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(2.2rem, 6vw, 4.5rem);
+      font-weight: 700;
+      letter-spacing: .02em;
+      line-height: 1;
+    }
+
+    .eyebrow {
+      position: relative;
+      z-index: 1;
+      margin-top: 18px;
+      color: var(--gold);
+      font-size: .78rem;
+      font-weight: 700;
+      letter-spacing: .24em;
+      text-transform: uppercase;
+    }
+
+    .hero h1 {
+      position: relative;
+      z-index: 1;
+      margin: 8px 0 8px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(1.6rem, 4vw, 2.35rem);
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+
+    .hero p {
+      position: relative;
+      z-index: 1;
+      max-width: 680px;
+      margin: 0 auto;
+      color: var(--muted);
+      font-size: 1rem;
+    }
+
+    .accent-line {
+      width: 92px;
+      height: 2px;
+      margin: 18px auto 0;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    }
+
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 24px;
+    }
+
+    .card {
+      overflow: hidden;
+      border: 1px solid rgba(143, 31, 41, .10);
+      border-radius: var(--radius);
+      background: rgba(255,255,255,.94);
+      box-shadow: 0 12px 34px rgba(52,31,31,.07);
+    }
+
+    .card.full {
+      grid-column: 1 / -1;
+    }
+
+    .card-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 20px 22px;
+      border-bottom: 1px solid rgba(143,31,41,.09);
+      background: linear-gradient(90deg, var(--blush), rgba(255,255,255,.96));
+    }
+
+    .card h2 {
+      margin: 0;
+      color: var(--red-dark);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1.4rem;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+
+    .card-mark {
+      flex: 0 0 auto;
+      color: var(--blue);
+      font-size: 1.25rem;
+      font-weight: 700;
+    }
+
+    .card-body {
+      padding: 10px 22px 18px;
+    }
+
+    .price-header,
+    .menu-row {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 100px 100px;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .price-header {
+      padding: 10px 0 8px;
+      color: var(--muted);
+      font-size: .75rem;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .menu-row {
+      min-height: 46px;
+      padding: 10px 0;
+      border-bottom: 1px dashed rgba(111,101,102,.17);
+    }
+
+    .menu-row:last-child { border-bottom: 0; }
+
+    .service {
+      min-width: 0;
+      font-weight: 600;
+    }
+
+    .price {
+      text-align: right;
+      white-space: nowrap;
+      color: var(--red-dark);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1.03rem;
+      font-weight: 700;
+    }
+
+    .single .menu-row {
+      grid-template-columns: minmax(0, 1fr) 110px;
+    }
+
+    .wax-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0 34px;
+    }
+
+    .wax-grid .menu-row {
+      grid-template-columns: minmax(0, 1fr) 90px;
+    }
+
+    .note {
+      margin: 30px 0 0;
+      padding: 18px 22px;
+      border: 1px solid rgba(199,161,102,.35);
+      border-radius: 16px;
+      background: linear-gradient(90deg, rgba(249,236,235,.82), rgba(255,255,255,.96));
+      text-align: center;
+      color: var(--red-dark);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: .95rem;
+      font-weight: 700;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+
+    footer {
+      padding: 24px 4px 0;
+      text-align: center;
+      color: var(--muted);
+      font-size: .83rem;
+    }
+
+    footer strong {
+      color: var(--blue-dark);
+    }
+
+    @media (max-width: 850px) {
+      .page {
+        width: min(100% - 22px, 720px);
+        padding-top: 18px;
+      }
+
+      .hero {
+        padding: 38px 18px 32px;
+        border-radius: 24px;
+      }
+
+      .menu-grid {
+        grid-template-columns: 1fr;
+        gap: 18px;
+      }
+
+      .card.full {
+        grid-column: auto;
+      }
+
+      .wax-grid {
+        grid-template-columns: 1fr;
+        gap: 0;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .page {
+        width: min(100% - 16px, 520px);
+      }
+
+      .hero {
+        padding: 32px 14px 28px;
+        margin-bottom: 16px;
+      }
+
+      .brand {
+        gap: 8px;
+      }
+
+      .brand .instyle {
+        width: 100%;
+        font-size: clamp(3rem, 16vw, 4.7rem);
+      }
+
+      .brand .nailspa {
+        font-size: clamp(2rem, 10vw, 3rem);
+      }
+
+      .card {
+        border-radius: 18px;
+      }
+
+      .card-head {
+        padding: 17px 16px;
+      }
+
+      .card h2 {
+        font-size: 1.13rem;
+      }
+
+      .card-body {
+        padding: 8px 16px 14px;
+      }
+
+      .price-header,
+      .menu-row {
+        grid-template-columns: minmax(0, 1fr) 66px 66px;
+        gap: 7px;
+      }
+
+      .single .menu-row,
+      .wax-grid .menu-row {
+        grid-template-columns: minmax(0, 1fr) 78px;
+      }
+
+      .price-header {
+        font-size: .64rem;
+      }
+
+      .menu-row {
+        min-height: 44px;
+      }
+
+      .service {
+        font-size: .91rem;
+        line-height: 1.28;
+      }
+
+      .price {
+        font-size: .94rem;
+      }
+
+      .note {
+        margin-top: 18px;
+        padding: 16px 12px;
+        font-size: .78rem;
+        line-height: 1.5;
+      }
+    }
+
+    @media (max-width: 390px) {
+      .price-header,
+      .menu-row {
+        grid-template-columns: minmax(0, 1fr) 60px 60px;
+      }
+
+      .card-body {
+        padding-left: 13px;
+        padding-right: 13px;
+      }
+
+      .service {
+        font-size: .86rem;
+      }
+    }
+
+    @media print {
+      body { background: #fff; }
+      .page { width: 100%; padding: 0; }
+      .hero, .card { box-shadow: none; }
+      .menu-grid { gap: 12px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section class="hero" aria-labelledby="menu-title">
+      <div class="brand" aria-label="InStyle Nail and Spa">
+        <span class="instyle">InStyle</span>
+        <span class="nailspa">NAIL &amp; SPA</span>
+      </div>
+      <div class="eyebrow">Relax • Refresh • Renew</div>
+      <h1 id="menu-title">Menu &amp; Pricing</h1>
+      <p>Beautiful nails, polished details, and relaxing spa care designed to help you look and feel your best.</p>
+      <div class="accent-line" aria-hidden="true"></div>
+    </section>
+
+    <section class="menu-grid" aria-label="Salon service menu">
+
+      <article class="card">
+        <div class="card-head">
+          <h2>Nail Enhancements</h2>
+          <span class="card-mark">✦</span>
+        </div>
+        <div class="card-body">
+          <div class="price-header">
+            <span>Service</span>
+            <span style="text-align:right">Full Set (&amp; up)</span>
+            <span style="text-align:right">Fill (&amp; up)</span>
+          </div>
+          <div class="menu-row"><span class="service">Acrylic</span><span class="price">$50</span><span class="price">$40</span></div>
+          <div class="menu-row"><span class="service">French Tip</span><span class="price">$55</span><span class="price">$45</span></div>
+          <div class="menu-row"><span class="service">Overlay</span><span class="price">$50</span><span class="price">—</span></div>
+          <div class="menu-row"><span class="service">Powder Gel</span><span class="price">$50</span><span class="price">$45</span></div>
+          <div class="menu-row"><span class="service">Pink/White Powder</span><span class="price">$65</span><span class="price">—</span></div>
+          <div class="menu-row"><span class="service">LCN Gel or Builder Gel</span><span class="price">$65</span><span class="price">$50</span></div>
+          <div class="menu-row"><span class="service">Gel Manicure</span><span class="price">$35</span><span class="price">—</span></div>
+          <div class="menu-row"><span class="service">Dip Powder</span><span class="price">$50</span><span class="price">—</span></div>
+          <div class="menu-row"><span class="service">Gel Polish</span><span class="price">$30</span><span class="price">—</span></div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-head">
+          <h2>Natural Hand &amp; Feet Treatments</h2>
+          <span class="card-mark">♡</span>
+        </div>
+        <div class="card-body">
+          <div class="price-header">
+            <span>Service</span>
+            <span style="text-align:right">Polish</span>
+            <span style="text-align:right">Gel</span>
+          </div>
+          <div class="menu-row"><span class="service">Manicure</span><span class="price">$25</span><span class="price">$35</span></div>
+          <div class="menu-row"><span class="service">Spa Pedicure</span><span class="price">$30</span><span class="price">$45</span></div>
+          <div class="menu-row"><span class="service">InStyle Pedicure</span><span class="price">$40</span><span class="price">$55</span></div>
+          <div class="menu-row"><span class="service">Deluxe Pedicure</span><span class="price">$45</span><span class="price">$60</span></div>
+          <div class="menu-row"><span class="service">Super Deluxe Pedicure</span><span class="price">$55</span><span class="price">$70</span></div>
+          <div class="menu-row"><span class="service">Mani/Pedi Combo</span><span class="price">$50</span><span class="price">$80</span></div>
+        </div>
+      </article>
+
+      <article class="card single">
+        <div class="card-head">
+          <h2>Additional Services</h2>
+          <span class="card-mark">＋</span>
+        </div>
+        <div class="card-body">
+          <div class="menu-row"><span class="service">French Tip Toes Polish Change</span><span class="price">$20</span></div>
+          <div class="menu-row"><span class="service">Toes Polish Change</span><span class="price">$15</span></div>
+          <div class="menu-row"><span class="service">Hand Polish Change</span><span class="price">$10</span></div>
+          <div class="menu-row"><span class="service">Nail Art Design</span><span class="price">Varies</span></div>
+          <div class="menu-row"><span class="service">Paraffin (Hot Wax) Treatment</span><span class="price">$10</span></div>
+          <div class="menu-row"><span class="service">Acrylic Removal</span><span class="price">$15</span></div>
+          <div class="menu-row"><span class="service">Nail Trim</span><span class="price">$5</span></div>
+          <div class="menu-row"><span class="service">Nail Repair</span><span class="price">$5</span></div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-head">
+          <h2>Threading</h2>
+          <span class="card-mark">◇</span>
+        </div>
+        <div class="card-body single">
+          <div class="menu-row"><span class="service">Eyebrows</span><span class="price">$15</span></div>
+          <div class="menu-row"><span class="service">Whole Face</span><span class="price">$40</span></div>
+          <div class="menu-row"><span class="service">Upper Lip</span><span class="price">$15</span></div>
+        </div>
+      </article>
+
+      <article class="card full">
+        <div class="card-head">
+          <h2>Waxing</h2>
+          <span class="card-mark">✧</span>
+        </div>
+        <div class="card-body wax-grid">
+          <div>
+            <div class="menu-row"><span class="service">Eyebrows</span><span class="price">$12 &amp; up</span></div>
+            <div class="menu-row"><span class="service">Half of Arms</span><span class="price">$30</span></div>
+            <div class="menu-row"><span class="service">Half of Legs</span><span class="price">$50</span></div>
+            <div class="menu-row"><span class="service">Chest</span><span class="price">$50</span></div>
+            <div class="menu-row"><span class="service">Back</span><span class="price">$50</span></div>
+            <div class="menu-row"><span class="service">Bikini</span><span class="price">$30</span></div>
+            <div class="menu-row"><span class="service">Whole Face</span><span class="price">$35</span></div>
+          </div>
+          <div>
+            <div class="menu-row"><span class="service">Upper Lip</span><span class="price">$10 &amp; up</span></div>
+            <div class="menu-row"><span class="service">Full Arms</span><span class="price">$50</span></div>
+            <div class="menu-row"><span class="service">Full Legs</span><span class="price">$70</span></div>
+            <div class="menu-row"><span class="service">Sideburns</span><span class="price">$20</span></div>
+            <div class="menu-row"><span class="service">Chin</span><span class="price">$10</span></div>
+            <div class="menu-row"><span class="service">Brazilian</span><span class="price">$50</span></div>
+            <div class="menu-row"><span class="service">Underarms</span><span class="price">$20</span></div>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <div class="note">Prices may vary depending on the service.</div>
+
+    <footer>
+      <strong>InStyle Nail &amp; Spa</strong><br />
+      Menu pricing shown above is based on the current salon menu provided.
+    </footer>
+  </main>
+</body>
+</html>
