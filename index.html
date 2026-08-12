@@ -8,9 +8,9 @@
   <style>
     :root {
       --red: #c9333f;
-      --red-dark: #8f1f29;
+      --red-dark: #a82b33;
       --blue: #4d86cf;
-      --blue-dark: #2e5f9b;
+      --blue-dark: #245c9f;
       --ink: #241f20;
       --muted: #6f6566;
       --cream: #fffaf7;
@@ -173,21 +173,34 @@
       gap: 16px;
       padding: 20px 22px;
       border-bottom: 1px solid rgba(143,31,41,.09);
-      background: linear-gradient(90deg, var(--blush), rgba(255,255,255,.96));
+      background: linear-gradient(90deg, rgba(239,246,255,.98), rgba(249,236,235,.74), rgba(255,255,255,.98));
     }
 
     .card h2 {
+      position: relative;
       margin: 0;
-      color: var(--red-dark);
+      padding-bottom: 6px;
+      color: var(--blue-dark);
       font-family: Georgia, "Times New Roman", serif;
       font-size: 1.4rem;
       letter-spacing: .04em;
       text-transform: uppercase;
     }
 
+    .card h2::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 46px;
+      height: 2px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--blue), var(--gold));
+    }
+
     .card-mark {
       flex: 0 0 auto;
-      color: var(--blue);
+      color: #6fa2df;
       font-size: 1.25rem;
       font-weight: 700;
     }
@@ -229,7 +242,7 @@
     .price {
       text-align: right;
       white-space: nowrap;
-      color: var(--red-dark);
+      color: var(--red);
       font-family: Georgia, "Times New Roman", serif;
       font-size: 1.03rem;
       font-weight: 700;
